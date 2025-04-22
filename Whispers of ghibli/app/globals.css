@@ -1,0 +1,570 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 142 76% 36%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 142 76% 36%;
+    --radius: 0.5rem;
+
+    /* Ghibli theme colors */
+    --ghibli-pink-light: 350 100% 94%;
+    --ghibli-pink: 350 100% 88%;
+    --ghibli-pink-deep: 350 80% 82%;
+
+    --ghibli-lavender-light: 270 100% 94%;
+    --ghibli-lavender: 270 76% 88%;
+    --ghibli-lavender-deep: 270 60% 82%;
+
+    --ghibli-mint-light: 150 60% 94%;
+    --ghibli-mint: 150 50% 88%;
+    --ghibli-mint-deep: 150 40% 82%;
+
+    --ghibli-yellow-light: 45 100% 94%;
+    --ghibli-yellow: 45 90% 88%;
+    --ghibli-yellow-deep: 45 80% 82%;
+
+    --ghibli-blue-light: 210 60% 94%;
+    --ghibli-blue: 210 50% 88%;
+    --ghibli-blue-deep: 210 40% 82%;
+
+    --ghibli-purple-deep: 280 70% 45%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 142 70% 50%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 142.1 70.6% 45.3%;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth; /* Enable smooth scrolling for the entire page */
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Add scroll margin to section targets to prevent them from being hidden under fixed headers */
+  section[id] {
+    scroll-margin-top: 2rem;
+  }
+}
+
+/* Custom font for Ghibli-style text */
+@font-face {
+  font-family: "GhibliFont";
+  src: url("/fonts/ghibli-font.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Import Cinzel Decorative for elegant title */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+
+.font-ghibli {
+  font-family: "Cinzel Decorative", "GhibliFont", serif;
+}
+
+.font-handwritten {
+  font-family: "Dancing Script", cursive;
+}
+
+/* Animation for floating in elements */
+@keyframes float-in {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation for fade in */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-in-out forwards;
+}
+
+/* Animation for shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 25%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* Button glow effect */
+@keyframes button-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px 2px rgba(255, 192, 203, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 15px 5px rgba(255, 192, 203, 0.7);
+  }
+}
+
+.animate-button-glow:hover {
+  animation: button-glow 2s ease-in-out infinite;
+}
+
+/* Button shimmer effect */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: transform 0.5s;
+  opacity: 0;
+}
+
+.btn-shimmer:hover::after {
+  transform: rotate(30deg) translate(0, 0);
+  opacity: 1;
+  animation: shimmer-sweep 1.5s ease-in-out;
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    transform: rotate(30deg) translate(-100%, -100%);
+  }
+  100% {
+    transform: rotate(30deg) translate(100%, 100%);
+  }
+}
+
+/* Custom colors */
+:root {
+  --color-lavender-100: #f3e8ff;
+  --color-lavender-300: #d8b4fe;
+  --color-lavender-400: #c084fc;
+  --color-lavender-500: #a855f7;
+}
+
+.bg-lavender-100 {
+  background-color: var(--color-lavender-100);
+}
+
+.bg-lavender-300 {
+  background-color: var(--color-lavender-300);
+}
+
+.bg-lavender-400 {
+  background-color: var(--color-lavender-400);
+}
+
+.bg-lavender-500 {
+  background-color: var(--color-lavender-500);
+}
+
+.text-lavender-700 {
+  color: #7e22ce;
+}
+
+.border-lavender-300 {
+  border-color: var(--color-lavender-300);
+}
+
+.border-lavender-400 {
+  border-color: var(--color-lavender-400);
+}
+
+/* Japanese subtitle font */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400&display=swap");
+
+.text-lavender-300 {
+  color: #c4b5fd;
+}
+
+/* Animated background gradients */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-gradient-animate {
+  background-size: 200% 200%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Sketch to color animation */
+@keyframes sketch-to-color {
+  0% {
+    filter: grayscale(100%) contrast(0.8) brightness(1.2);
+    text-shadow: none;
+  }
+  50% {
+    filter: grayscale(50%) contrast(0.9) brightness(1.1);
+  }
+  100% {
+    filter: grayscale(0%) contrast(1) brightness(1);
+  }
+}
+
+.animate-sketch-to-color {
+  animation: sketch-to-color 1.5s ease-out forwards;
+}
+
+/* Blur to sharp animation */
+@keyframes blur-to-sharp {
+  0% {
+    filter: blur(5px);
+    opacity: 0.7;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.animate-blur-to-sharp {
+  animation: blur-to-sharp 0.8s ease-out forwards;
+}
+
+/* Floating animation for particles */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Paper dust animation */
+@keyframes paper-dust-float {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-30px) rotate(0);
+    opacity: 0;
+  }
+}
+
+.animate-paper-dust {
+  animation: paper-dust-float 4s ease-in-out infinite;
+}
+
+/* Feather fall animation */
+@keyframes feather-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) rotate(5deg);
+    opacity: 1;
+  }
+}
+
+.animate-feather-fall {
+  animation: feather-fall 1.5s ease-out forwards;
+}
+
+/* Page turn animation */
+@keyframes page-turn {
+  0% {
+    transform: rotateY(-90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-page-turn {
+  transform-origin: left center;
+  animation: page-turn 1s ease-out forwards;
+}
+
+/* Custom overlay colors for Ghibli sections */
+.bg-lavender-mist {
+  background-color: rgba(230, 230, 250, 0.5); /* Lavender mist overlay */
+}
+
+.bg-dreamy-blush {
+  background-color: rgba(255, 228, 225, 0.5); /* Dreamy blush overlay */
+}
+
+.bg-pale-cloud {
+  background-color: rgba(240, 248, 255, 0.5); /* Pale cloud blue overlay */
+}
+
+.bg-warm-rose {
+  background-color: rgba(255, 182, 193, 0.5); /* Warm rose pink overlay */
+}
+
+.bg-soft-coral {
+  background-color: rgba(255, 127, 80, 0.4); /* Soft coral overlay */
+}
+
+.bg-golden-glow {
+  background-color: rgba(255, 223, 186, 0.5); /* Golden glow overlay */
+}
+
+.bg-misty-jade {
+  background-color: rgba(173, 216, 189, 0.5); /* Misty jade overlay */
+}
+
+.bg-ocean-teal {
+  background-color: rgba(128, 203, 196, 0.5); /* Ocean teal overlay */
+}
+
+.bg-forest-dream {
+  background-color: rgba(76, 175, 80, 0.4); /* Forest dream overlay */
+}
+
+/* Ghibli theme background colors */
+.bg-ghibli-pink-light {
+  background-color: hsl(var(--ghibli-pink-light));
+}
+
+.bg-ghibli-pink {
+  background-color: hsl(var(--ghibli-pink));
+}
+
+.bg-ghibli-pink-deep {
+  background-color: hsl(var(--ghibli-pink-deep));
+}
+
+.bg-ghibli-lavender-light {
+  background-color: hsl(var(--ghibli-lavender-light));
+}
+
+.bg-ghibli-lavender {
+  background-color: hsl(var(--ghibli-lavender));
+}
+
+.bg-ghibli-lavender-deep {
+  background-color: hsl(var(--ghibli-lavender-deep));
+}
+
+.bg-ghibli-mint-light {
+  background-color: hsl(var(--ghibli-mint-light));
+}
+
+.bg-ghibli-mint {
+  background-color: hsl(var(--ghibli-mint));
+}
+
+.bg-ghibli-mint-deep {
+  background-color: hsl(var(--ghibli-mint-deep));
+}
+
+.bg-ghibli-yellow-light {
+  background-color: hsl(var(--ghibli-yellow-light));
+}
+
+.bg-ghibli-yellow {
+  background-color: hsl(var(--ghibli-yellow));
+}
+
+.bg-ghibli-yellow-deep {
+  background-color: hsl(var(--ghibli-yellow-deep));
+}
+
+.bg-ghibli-blue-light {
+  background-color: hsl(var(--ghibli-blue-light));
+}
+
+.bg-ghibli-blue {
+  background-color: hsl(var(--ghibli-blue));
+}
+
+.bg-ghibli-blue-deep {
+  background-color: hsl(var(--ghibli-blue-deep));
+}
+
+/* Ghibli theme gradients */
+.bg-ghibli-gradient-pink-to-lavender {
+  background: linear-gradient(to bottom, hsl(var(--ghibli-pink-light)), hsl(var(--ghibli-lavender-light)));
+}
+
+.bg-ghibli-gradient-lavender-to-mint {
+  background: linear-gradient(to bottom, hsl(var(--ghibli-lavender-light)), hsl(var(--ghibli-mint-light)));
+}
+
+.bg-ghibli-gradient-mint-to-yellow {
+  background: linear-gradient(to bottom, hsl(var(--ghibli-mint-light)), hsl(var(--ghibli-yellow-light)));
+}
+
+.bg-ghibli-gradient-yellow-to-blue {
+  background: linear-gradient(to bottom, hsl(var(--ghibli-yellow-light)), hsl(var(--ghibli-blue-light)));
+}
+
+.bg-ghibli-gradient-blue-to-pink {
+  background: linear-gradient(to bottom, hsl(var(--ghibli-blue-light)), hsl(var(--ghibli-pink-light)));
+}
+
+/* Ghibli theme text colors */
+.text-ghibli-pink-deep {
+  color: hsl(var(--ghibli-pink-deep));
+}
+
+.text-ghibli-lavender-deep {
+  color: hsl(var(--ghibli-lavender-deep));
+}
+
+.text-ghibli-mint-deep {
+  color: hsl(var(--ghibli-mint-deep));
+}
+
+.text-ghibli-yellow-deep {
+  color: hsl(var(--ghibli-yellow-deep));
+}
+
+.text-ghibli-blue-deep {
+  color: hsl(var(--ghibli-blue-deep));
+}
+
+.text-ghibli-purple-deep {
+  color: hsl(var(--ghibli-purple-deep));
+}
+
+/* Section transitions */
+.bg-ghibli-gradient-pink-to-lavender {
+  position: relative;
+  background: linear-gradient(to bottom, hsl(var(--ghibli-pink-light)), hsl(var(--ghibli-lavender-light)));
+}
+
+.bg-ghibli-gradient-lavender-to-mint {
+  position: relative;
+  background: linear-gradient(to bottom, hsl(var(--ghibli-lavender-light)), hsl(var(--ghibli-mint-light)));
+}
+
+.bg-ghibli-gradient-mint-to-yellow {
+  position: relative;
+  background: linear-gradient(to bottom, hsl(var(--ghibli-mint-light)), hsl(var(--ghibli-yellow-light)));
+}
+
+.bg-ghibli-gradient-yellow-to-blue {
+  position: relative;
+  background: linear-gradient(to bottom, hsl(var(--ghibli-yellow-light)), hsl(var(--ghibli-blue-light)));
+}
+
+.bg-ghibli-gradient-blue-to-pink {
+  position: relative;
+  background: linear-gradient(to bottom, hsl(var(--ghibli-blue-light)), hsl(var(--ghibli-pink-light)));
+}
+
+/* Smooth section transitions */
+.bg-ghibli-gradient-pink-to-lavender::after,
+.bg-ghibli-gradient-lavender-to-mint::after,
+.bg-ghibli-gradient-mint-to-yellow::after,
+.bg-ghibli-gradient-yellow-to-blue::after,
+.bg-ghibli-gradient-blue-to-pink::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: inherit;
+  filter: blur(20px);
+  opacity: 0.8;
+  z-index: 1;
+  transform: translateY(50%);
+  pointer-events: none;
+}
